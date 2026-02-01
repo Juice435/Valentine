@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine 🎀</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffd1dc, #ffb6c1);
+  font-family: 'Comic Sans MS', cursive;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.container {
+  text-align: center;
+  background: #fff0f5;
+  padding: 30px;
+  border-radius: 25px;
+  box-shadow: 0 0 30px pink;
+  max-width: 90%;
+}
+
+h1, h2 {
+  color: #ff69b4;
+}
+
+button {
+  padding: 15px 30px;
+  font-size: 18px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.yes {
+  background-color: #ff69b4;
+  color: white;
+}
+
+.no {
+  background-color: white;
+  color: #ff69b4;
+  position: absolute;
+}
+
+img {
+  width: 180px;
+  margin-top: 15px;
+}
+
+.heart {
+  position: fixed;
+  bottom: -10px;
+  font-size: 20px;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-110vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" autoplay loop>
+  <source src="https://pixabay.com/music/video-games-a-love-story-but-its-a-beatbox-185462/">
+</audio>
+
+<div class="container" id="box">
+  <h1>Fiha 🎀</h1>
+  <h2 id="question">Will you be my Valentine? 💖</h2>
+
+  <img id="gif" src="https://media.giphy.com/media/11sBLVxNs7v6WA/giphy.gif">
+
+  <div>
+    <button class="yes" onclick="nextYes()">Yes 🥰</button>
+    <button class="no" id="noBtn" onmouseover="fakeNo()">No 🙄</button>
+  </div>
+</div>
+
+<script>
+let stage = 0;
+
+const stages = [
+  {
+    q: "Are you suuuure? 🥺",
+    gif: "https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif"
+  },
+  {
+    q: "Like… REALLY really sure? 😳",
+    gif: "https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif"
+  },
+  {
+    q: "Okay last chance 😌💗",
+    gif: "https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif"
+  }
+];
+
+function nextYes() {
+  if (stage < stages.length) {
+    document.getElementById("question").innerText = stages[stage].q;
+    document.getElementById("gif").src = stages[stage].gif;
+    stage++;
+  } else {
+    document.getElementById("box").innerHTML = `
+      <h1>YAYYYY 🎉💖</h1>
+      <h2>You’re my Valentine forever 😌</h2>
+      <img src="https://media.giphy.com/media/l4FGpP4lxGGgK5CBW/giphy.gif">
+      <p style="color:#ff69b4;font-size:18px;">I love you so much 🎀</p>
+    `;
+  }
+}
+
+function fakeNo() {
+  const noBtn = document.getElementById("noBtn");
+  noBtn.style.left = Math.random() * (window.innerWidth - 100) + "px";
+  noBtn.style.top = Math.random() * (window.innerHeight - 100) + "px";
+}
+  
+// floating hearts
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💗";
+  heart.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}, 300);
+</script>
+
+</body>
+</html>
